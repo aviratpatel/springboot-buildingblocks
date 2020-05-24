@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package com.stacksimplify.restservices.exceptions;
+
+/**
+ * @author Avi
+ *
+ */
+public class UserNameNotFoundException extends Exception{
+	
+	private static final long serialVersionUID = 1L;
+
+	/** Superclass constructor
+	 * @param message
+	 */
+	public UserNameNotFoundException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+}

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  * @author Avi
@@ -28,9 +30,11 @@ public class User {
 	@GeneratedValue // to create auto generated value for primary column; let us keep default type which is sequence
 	private Long id;
 	
+	@NotEmpty(message = "Username is a mandatory attribute, please provide username") //Use ctrl+Shift+O to import javax validation
 	@Column(name="USER_NAME", length=30, nullable=false, unique=true)
 	private String username;
 	
+	@Size(min=2, message = "First Name should have minimum two characthers") //Use ctrl+Shift+O to import javax validation
 	@Column(name="FIRST_NAME", length=30, nullable=false)	
 	private String firstname;
 	@Column(name="LAST_NAME", length=30, nullable=false)	
