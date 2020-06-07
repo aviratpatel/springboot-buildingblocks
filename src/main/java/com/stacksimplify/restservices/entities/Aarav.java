@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 // Entity is a POJO and you can say it like DB table on a very high level term
 //@Entity(name="users")
-@Entity
+@Entity // You need to import import javax.persistence.Entity; package using control + shift + o
 @Table(name="aarav")  // User Ctrl+Space+o to import java library class without seeing possible options; 
 
 // Above statement creates table with name aarav based on columns defined in the class below; Other option is to run create table statement in data.sql file directly but then, we cannot set the values without creating repositories

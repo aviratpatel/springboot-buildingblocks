@@ -10,7 +10,7 @@ import com.stacksimplify.restservices.entities.User;
 
 /**
  * @author Avi
- *
+ * This is an interface which extends JPA Repository as we need to add one more method which is not present; custom method
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{

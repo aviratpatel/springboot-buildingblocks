@@ -3,10 +3,13 @@
  */
 package com.stacksimplify.restservices.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,7 +20,7 @@ import javax.validation.constraints.Size;
  */
 // Entity is a POJO and you can say it like DB table on a very high level term
 //@Entity(name="users")
-@Entity
+@Entity // You need to import import javax.persistence.Entity; package using control + shift + o
 @Table(name="user")  // User Ctrl+Space+o to import java library class without seeing possible options; 
 
 //H2 database is in-memory database and it has default schema testdb (with username as sa and pwd as blank/null)
@@ -46,7 +49,14 @@ public class User {
 	
 	@Column(name="SSN", length=40, nullable=false, unique=true)
 	private String ssn; // social security number used in USA
-
+	
+	// Create one to many relationship to user field of Order entity; We are not creating primary key on DB 
+	// but, we will need to store user id in Order table
+	// Generated getters and setters of this new field orders on 7th June 2020
+	@OneToMany(mappedBy="user") //import javax.persistence.OneToMany
+	private List<Order> orders; //one user can do multiple orders to making as list of order field; import java.util.List package using control+shift+o
+  
+	
 	// No argument constructor
 	/**
 	 * 
@@ -180,6 +190,21 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
 	}
+
+	/**
+	 * @return the orders
+	 */
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	/**
+	 * @param orders the orders to set
+	 */
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	
 	
 
 		

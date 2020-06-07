@@ -38,7 +38,7 @@ public class UserService {
 		Optional<User> user = userRepository.findById(id); //userRepository.findById(id).isPresent();
 		
 		if(!user.isPresent()) {
-			throw new UserNotFoundException("User not found in user repository");
+			throw new UserNotFoundException("User is not found in user repository");
 		}
 		return user;
    //TODO check use of userRepository.getOne(id) method;
