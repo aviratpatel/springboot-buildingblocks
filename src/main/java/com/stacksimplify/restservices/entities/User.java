@@ -54,7 +54,7 @@ public class User {
 	// but, we will need to store user id in Order table
 	// Generated getters and setters of this new field orders on 7th June 2020
 	@OneToMany(mappedBy="user") //import javax.persistence.OneToMany
-	private List<Order> orders; //one user can do multiple orders to making as list of order field; import java.util.List package using control+shift+o
+	private List<Order> orders; //one user can do multiple orders so, making as list of order field; import java.util.List package using control+shift+o
   
 	
 	// No argument constructor

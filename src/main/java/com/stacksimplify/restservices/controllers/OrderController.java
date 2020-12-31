@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.stacksimplify.restservices.entities.Order;
-import com.stacksimplify.restservices.entities.User;
+//import com.stacksimplify.restservices.entities.User;
 import com.stacksimplify.restservices.exceptions.UserNotFoundException;
 import com.stacksimplify.restservices.repositories.OrderRepository;
 import com.stacksimplify.restservices.repositories.UserRepository;
 
 import com.stacksimplify.restservices.services.OrderService;
-import com.stacksimplify.restservices.services.UserService;
+//import com.stacksimplify.restservices.services.UserService;
 
 /**
  * @author Avi
@@ -33,12 +33,7 @@ import com.stacksimplify.restservices.services.UserService;
 @RequestMapping(value="/users")
 public class OrderController {
 	
-	@Autowired
-	private UserRepository userRepository; // Import com.stacksimplify.restservices.repositories.UserRepository
 
-	@Autowired
-	private OrderRepository orderRepository;
-	
 	// Autowired Order
 	@Autowired
 	private OrderService orderService;

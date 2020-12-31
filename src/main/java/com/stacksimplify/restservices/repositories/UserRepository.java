@@ -10,6 +10,7 @@ import com.stacksimplify.restservices.entities.User;
 
 /**
  * @author Avi
+ *  * Interface to create new user
  * This is an interface which extends JPA Repository as we need to add one more method which is not present; custom method
  */
 @Repository

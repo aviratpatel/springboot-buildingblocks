@@ -7,7 +7,7 @@ package com.stacksimplify.restservices.hello;
  * @author Avi
  * UserDetails class that holds:
  *  3 attributes/variables
- *  getter and setter methods (Use Source menu --> Generate Getters and Settors...)
+ *  getter and setter methods (Use Source menu --> Generate Getters and Setters...)
  *  constructors (Use Source menu --> Generate Constructor using Fields...)
  *  toString method (Use Source menu --> Generate toString()...)
  */

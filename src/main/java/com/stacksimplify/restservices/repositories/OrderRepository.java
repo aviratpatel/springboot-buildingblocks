@@ -10,7 +10,7 @@ import com.stacksimplify.restservices.entities.Order;
 
 /**
  * @author Avi
- * Interface to create an order
+ * Interface to create new  order
  * We want to perform operations onto Order entity and primary key is id; so define type as Long for that key 
  */
 
