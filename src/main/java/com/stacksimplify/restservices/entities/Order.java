@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -20,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity // You need to import import javax.persistence.Entity package using control + shift + o
 @Table(name = "orders") // You need to import import javax.persistence.Table package using control + shift + o
-public class Order {
+public class Order extends RepresentationModel<Order>{
 	
 	@Id
 	@GeneratedValue
@@ -63,7 +67,7 @@ public class Order {
 	}
 
 	/**
-	 * @param orderdescription the orderdescription to set
+	 * @param orderdescription the order description to set
 	 */
 	public void setOrderdescription(String orderdescription) {
 		this.orderdescription = orderdescription;

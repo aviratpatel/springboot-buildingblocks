@@ -46,7 +46,7 @@ import com.stacksimplify.restservices.services.UserService;
 @RequestMapping(value = "/users")  // import org.springframework.web.bind.annotation.RequestMapping package
 public class UserController {
 
-	// Autowired User
+	// Autowired UserService
 	@Autowired
 	private UserService userService;
 	
@@ -76,7 +76,7 @@ public class UserController {
 		try {
 			userService.createUser(user);	
 			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(builder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
+			headers.setLocation(builder.path("/users/{id}").buildAndExpand(user.getUserid()).toUri());
 			return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 			
 		}catch(UserExistsException ex) {

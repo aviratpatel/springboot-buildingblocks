@@ -14,6 +14,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.RepresentationModel;
+
+
+
+
 /**
  * @author Avi
  *
@@ -27,11 +34,11 @@ import javax.validation.constraints.Size;
 // But, data will be wiped off as soon as you restart application or reload JVM (DB stores memory in RAM
 //@Table(name="user", schema="avi")  // For mySQL, oracle connection, schema is must needed parameter
 
-public class User {
+public class User extends RepresentationModel<User>{
 	
 	@Id // JPA considers this annotation as primary key; Each JPA entity must have a primary key
 	@GeneratedValue // to create auto generated value for primary column; let us keep default type which is sequence
-	private Long id;
+	private Long userid;
 	
 	@NotEmpty(message = "Username is a mandatory attribute, please provide username") //Use ctrl+Shift+O to import javax validation
 	@Column(name="USER_NAME", length=30, nullable=false, unique=true)
@@ -65,39 +72,48 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	// Field Constructors (optional)
+
+
 	/**
-	 * @param id
+	 * @param userid
 	 * @param username
 	 * @param firstname
 	 * @param lastname
 	 * @param email
 	 * @param role
 	 * @param ssn
+	 * @param orders
 	 */
-	public User(Long id, String username, String firstname, String lastname, String email, String role, String ssn) {
-		this.id = id;
+	public User(Long userid,
+			@NotEmpty(message = "Username is a mandatory attribute, please provide username") String username,
+			@Size(min = 2, message = "First Name should have minimum two characthers") String firstname,
+			String lastname, String email, String role, String ssn, List<Order> orders) {
+		super();
+		this.userid = userid;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.role = role;
 		this.ssn = ssn;
+		this.orders = orders;
 	}
+
+
 
 	// Getters and Setters
 	/**
-	 * @return the id
+	 * @return the userid
 	 */
-	public Long getId() {
-		return id;
+	public Long getUserid() {
+		return userid;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param userid the userid to set
 	 */
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserid(Long userid) {
+		this.userid = userid;
 	}
 
 	/**
@@ -184,12 +200,6 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	// toString method (optional; required for bean logging/debugging)
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
-	}
 
 	/**
 	 * @return the orders
@@ -204,8 +214,15 @@ public class User {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
-	
-	
+
+	// toString method (optional; required for bean logging/debugging)
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders + "]";
+	}
+
+
 
 		
 
