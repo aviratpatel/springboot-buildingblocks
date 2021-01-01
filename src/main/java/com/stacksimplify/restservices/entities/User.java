@@ -14,9 +14,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.RepresentationModel;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -34,6 +35,7 @@ import org.springframework.hateoas.RepresentationModel;
 // But, data will be wiped off as soon as you restart application or reload JVM (DB stores memory in RAM
 //@Table(name="user", schema="avi")  // For mySQL, oracle connection, schema is must needed parameter
 
+@JsonIgnoreProperties({"firstname", "lastname"})
 public class User extends RepresentationModel<User>{
 	
 	@Id // JPA considers this annotation as primary key; Each JPA entity must have a primary key
@@ -45,16 +47,17 @@ public class User extends RepresentationModel<User>{
 	private String username;
 	
 	@Size(min=2, message = "First Name should have minimum two characthers") //Use ctrl+Shift+O to import javax validation
-	@Column(name="FIRST_NAME", length=30, nullable=false)	
+	@Column(name="FIRST_NAME", length=30, nullable=true)	
 	private String firstname;
-	@Column(name="LAST_NAME", length=30, nullable=false)	
+	@Column(name="LAST_NAME", length=30, nullable=true)	
 	private String lastname;
 	@Column(name="EMAIL_ADDRESS", length=30, nullable=false)	
 	private String email;
 	@Column(name="ROLE", length=30, nullable=false)	
 	private String role;
 	
-	@Column(name="SSN", length=40, nullable=false, unique=true)
+	@Column(name="SSN", length=40, nullable=true, unique=true) //changed it to nullable=false because POST command was failing due to JsonIgnore annotation
+	@JsonIgnore
 	private String ssn; // social security number used in USA
 	
 	// Create one to many relationship to user field of Order entity; We are not creating primary key on DB 
