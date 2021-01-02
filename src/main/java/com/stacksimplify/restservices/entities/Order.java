@@ -15,6 +15,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 /**
  * @author Avi
@@ -28,8 +29,10 @@ public class Order extends RepresentationModel<Order>{
 	
 	@Id
 	@GeneratedValue
+	@JsonView(Views.Internal.class)
 	private long orderid;
 	
+	@JsonView(Views.Internal.class)
 	private String orderdescription;
 	
 	// We need to create a relation to User entity; Multiple orders in Order entity can be associated to user

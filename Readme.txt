@@ -12,9 +12,11 @@ http://localhost:8897/hateoas/users/122
 http://localhost:8897/hateoas/users/122/orders
 
 
-
-
-
+http://localhost:8897/employees
+http://localhost:8897/employees/1001
+http://localhost:8897/jsonview/employees/empview/1001
+http://localhost:8897/jsonview/employees/managerview/1001
+http://localhost:8897/jsonview/employees/hrview/1001
 
 ##### Observations #####
 1. In case you are using HATEOAS v1.0 and above (Spring boot >= 2.2.0), do note that the classnames have changed. Notably the below classes have been renamed:

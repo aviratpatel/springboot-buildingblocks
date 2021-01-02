@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 
@@ -34,36 +34,44 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 // But, data will be wiped off as soon as you restart application or reload JVM (DB stores memory in RAM
 //@Table(name="user", schema="avi")  // For mySQL, oracle connection, schema is must needed parameter
 
-// @JsonIgnoreProperties({"firstname", "lastname"})
-@JsonFilter(value="userFilter")
+// @JsonIgnoreProperties({"firstname", "lastname"}) --> Static Fitering using @JsonIgnoreProperties 
+// @JsonFilter(value="userFilter") --> Used for MappingJacksonValue Filtering Section; userFilter string value is used in UserMappingJacksonController class
 public class User extends RepresentationModel<User>{
 	
 	@Id // JPA considers this annotation as primary key; Each JPA entity must have a primary key
 	@GeneratedValue // to create auto generated value for primary column; let us keep default type which is sequence
+	@JsonView(Views.External.class)
 	private Long userid;
 	
 	@NotEmpty(message = "Username is a mandatory attribute, please provide username") //Use ctrl+Shift+O to import javax validation
 	@Column(name="USER_NAME", length=30, nullable=false, unique=true)
+	@JsonView(Views.External.class)
 	private String username;
 	
 	@Size(min=2, message = "First Name should have minimum two characthers") //Use ctrl+Shift+O to import javax validation
 	@Column(name="FIRST_NAME", length=30, nullable=true)	
+	@JsonView(Views.External.class)
 	private String firstname;
 	@Column(name="LAST_NAME", length=30, nullable=true)	
+	@JsonView(Views.External.class)
 	private String lastname;
 	@Column(name="EMAIL_ADDRESS", length=30, nullable=false)	
+	@JsonView(Views.External.class)
 	private String email;
 	@Column(name="ROLE", length=30, nullable=false)	
+	@JsonView(Views.Internal.class)
 	private String role;
 	
 	@Column(name="SSN", length=40, nullable=false, unique=true) //changed it to nullable=false because POST command was failing due to JsonIgnore annotation
 	//@JsonIgnore
+	@JsonView(Views.Internal.class)
 	private String ssn; // social security number used in USA
 	
 	// Create one to many relationship to user field of Order entity; We are not creating primary key on DB 
 	// but, we will need to store user id in Order table
 	// Generated getters and setters of this new field orders on 7th June 2020
 	@OneToMany(mappedBy="user") //import javax.persistence.OneToMany
+	@JsonView(Views.Internal.class)
 	private List<Order> orders; //one user can do multiple orders so, making as list of order field; import java.util.List package using control+shift+o
   
 	
