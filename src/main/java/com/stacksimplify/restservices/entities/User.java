@@ -16,8 +16,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 
 
@@ -35,7 +34,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 // But, data will be wiped off as soon as you restart application or reload JVM (DB stores memory in RAM
 //@Table(name="user", schema="avi")  // For mySQL, oracle connection, schema is must needed parameter
 
-@JsonIgnoreProperties({"firstname", "lastname"})
+// @JsonIgnoreProperties({"firstname", "lastname"})
+@JsonFilter(value="userFilter")
 public class User extends RepresentationModel<User>{
 	
 	@Id // JPA considers this annotation as primary key; Each JPA entity must have a primary key
@@ -56,8 +56,8 @@ public class User extends RepresentationModel<User>{
 	@Column(name="ROLE", length=30, nullable=false)	
 	private String role;
 	
-	@Column(name="SSN", length=40, nullable=true, unique=true) //changed it to nullable=false because POST command was failing due to JsonIgnore annotation
-	@JsonIgnore
+	@Column(name="SSN", length=40, nullable=false, unique=true) //changed it to nullable=false because POST command was failing due to JsonIgnore annotation
+	//@JsonIgnore
 	private String ssn; // social security number used in USA
 	
 	// Create one to many relationship to user field of Order entity; We are not creating primary key on DB 
