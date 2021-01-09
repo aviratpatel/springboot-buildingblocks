@@ -25,3 +25,9 @@ ResourceSupport is now RepresentationModel which you will use to extend your cus
 Resource is now EntityModel
 Resources is now CollectionModel
 PagedResources is now PagedModel
+
+2. Despite of Autowire, bean is not created and application gives an error when you start it
+Answer: It happens mostly when you add dependencies in pom.xml and related libraries could not be downloaded. In Spring Tool Suite do following steps:
+Right click on project > Run As > Maven Clean
+Right click on project > Run As > Maven install
+ref: https://stackoverflow.com/questions/14869771/how-to-run-annotation-processor-in-eclipse-on-save
